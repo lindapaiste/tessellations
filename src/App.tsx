@@ -1,37 +1,37 @@
 import React from "react";
-import Arrow from "./Arrow";
-import PlacedArrow from "./PlacedArrow";
-import { View, TouchableHighlight } from "react-native";
-
-const colors = ["blue", "green", "yellow"];
+import Arrow from "./arrows/Arrow";
+import ArrowGrid from "./arrows/ArrowGrid";
+import {randomHexes} from "./lib";
+import {useChangingColors} from "./universal/useChangingColors";
+import RenderGrid from "./universal/RenderGrid";
+import Polygon from "./universal/svg/Polygon";
+import OctagonGrid from "./octagons/RegularOctagonGrid";
+import IrregularOctagonGrid from "./octagons/IrregularOctagonGrid";
+import RegularOctagonGrid from "./octagons/RegularOctagonGrid";
 
 export default () => {
-  //<Arrow color={"green"} />;
-  const [rotations, setRotations] = React.useState(colors.map((c, i) => i % 1));
 
-  return (
-    <View>
-      {colors.map((color, i) => (
-        <TouchableHighlight
-          onPress={() =>
-            setRotations([...rotations].splice(i, 1, rotations[i] + 1))
-          }
-        >
-          <PlacedArrow
-            rotation={rotations[i]}
-            x={0}
-            y={0}
-            size={100}
-            color={color}
-          />
-        </TouchableHighlight>
-      ))}
-    </View>
-  );
-};
+    const grid = new RegularOctagonGrid({
+        width: 5,
+        height: 9,
+        tileSize: 200,
+    });
 
-/**
- *   <path
-      d="M 0 1 h 1 v -1 l 2 -2 l -2 2 v -1 h -1"
-  />
- */
+    const colors = useChangingColors({
+        initialColors: randomHexes(grid.getCount()),
+        duration: 1000,
+    });
+
+    return (
+        <RenderGrid
+            grid={grid}
+            RenderTile={({index}) => (
+                <Polygon
+                    color={colors[index]}
+                    polygon={grid.getPolygonPoints(index)}
+                    viewBox={grid.getViewBox(index)}
+                />
+            )}
+        />
+    )
+}
