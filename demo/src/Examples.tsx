@@ -14,7 +14,6 @@ import {
 } from "@lindapaiste/react-svg-patterns";
 import React, {PropsWithChildren} from "react";
 import {randomColor, randomHexes} from "./randomColor";
-import {CheckerTile} from "@lindapaiste/react-svg-patterns/patterns/instances/Checkers";
 import {makePlus} from "@lindapaiste/react-svg-patterns/shapes/polygon/Plus";
 import { Pattern } from "@lindapaiste/react-svg-patterns/patterns/PatternFactory";
 
@@ -112,9 +111,12 @@ const RhombusSizes = () => (
 
 const Checkers = () => (
     <Group title="50/50 Checkerboard Tessellations">
-        <CheckerTile
-            {...makeProps()}
+        <ExamplePatternTile
             elementWidth={50}
+            shape={Square}
+            stagger={50}
+            spacingBetweenRows={0}
+            spacing={50}
         />
         <ExamplePatternTile
             elementWidth={60}
