@@ -16,7 +16,9 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
+    "noEmit": false,
+    "sourceMap": true,
+    "declaration": true,
     "jsx": "react",
     "noFallthroughCasesInSwitch": true,
     "outDir": "build"

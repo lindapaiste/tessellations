@@ -4,7 +4,7 @@
   "description": "Example tile designs.",
   "main": "src/index.js",
   "dependencies": {
-    "@lindapaiste/react-svg-patterns": "link:../package",
+    "@lindapaiste/react-svg-patterns": "file:../package",
     "chroma-js": "2.1.0",
     "react": "16.13.1",
     "react-dom": "^16.13.1"
