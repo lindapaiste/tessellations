@@ -1,81 +1,98 @@
-import {CenteredShapeProps, SizeOrRect} from "./types";
-import {Point, polygonRotate} from "geometric";
-import {XYRectangle} from "../patterns";
+import { Line, Point, polygonRotate } from "geometric";
+import { CenteredShapeProps, Size, XYRectangle } from "./types";
 
 /**
- * svg string uses a space between each point and a comma between x and y
+ * Convert an array of polygon points into a string
+ * which can be used as the 'points' property of an SVG <polygon> element.
+ * The SVG string uses a space between each point and a comma between x and y.
  */
-export const polygonSvgString = (polygon: Point[]): string => {
-    return polygon.map(point => point.join(",")).join(" ");
-}
+export const polygonSvgString = (polygon: Point[]): string =>
+  polygon.map((point) => point.join(",")).join(" ");
 
 /**
- * convert a rectangle or size into a viewBox string
+ * Convert a rectangle or a size into an SVG viewBox string.
+ * x and y are optional, but width and height are required.
  */
-export const viewBoxSvgString = (rect: SizeOrRect): string => {
-    return [rect.x || 0, rect.y || 0, rect.width, rect.height].join(" ");
-}
+export const viewBoxSvgString = (rect: Size & Partial<XYRectangle>): string =>
+  [rect.x || 0, rect.y || 0, rect.width, rect.height].join(" ");
 
 /**
- * geometric package has a polygon translate, but it is based on angle and distance rather than x and y
+ * Translate a point based on an x and y value of the translation.
  */
-export const translateBy = (polygon: Point[], translation: Point): Point[] => {
-    return polygon.map(point => translatePoint(point, translation));
-}
-
-export const translatePoint = ([x, y]: Point, [tX, tY]: Point): Point => {
-    return [x + tX, y + tY];
-}
-
-export const maybeRotate = (polygon: Point[], rotate: number | undefined, origin: Point | undefined): Point[] => {
-    return rotate ? polygonRotate(polygon, rotate, origin) : polygon;
-}
+export const translatePoint = ([x, y]: Point, [tX, tY]: Point): Point => [
+  x + tX,
+  y + tY,
+];
 
 /**
- * apply width to x value and height to y value
+ * Translate a polygon based on an x and y value of the translation.
+ * Note: geometric package has a polygon translate, but it is based on angle and distance
+ * rather than x and y
  */
-export const stretchPoint = ([x, y]: Point, width: number, height: number): Point => {
-    return [x * width, y * height];
-}
-export const sizeShape = (shape: Point[], width: number, height: number): Point[] => {
-    return shape.map(point => stretchPoint(point, width, height));
-}
+export const translateBy = (polygon: Point[], translation: Point): Point[] =>
+  polygon.map((point) => translatePoint(point, translation));
 
 /**
- * helper takes a shape which is defined with width = 1, height = 1, center = [0,0]
+ * Apply a rotation to a polygon, or return the original polygon if the rotation is 0.
+ */
+export const maybeRotate = (
+  polygon: Point[],
+  rotate: number | undefined,
+  origin: Point | undefined
+): Point[] => (rotate ? polygonRotate(polygon, rotate, origin) : polygon);
+
+/**
+ * Resize a polygon based on the provided width and height ratios.
+ * Must be centered at [0,0].
+ *
+ * TODO: update @types package for geometric to include defs for new polygonScaleX/Y functions
+ */
+export const resizePolygon = (
+  shape: Point[],
+  widthScale: number,
+  heightScale: number
+): Point[] => shape.map(([x, y]) => [x * widthScale, y * heightScale]);
+
+/**
+ * Helper takes a shape which is defined with width = 1, height = 1, center = [0,0]
  * and applies the actual width, height, center, and rotation.
  *
- * heightRatio creates a default height based on width if prop height is not set
+ * heightRatio creates a default height based on width if prop height is not set.
  *
- * not doing anything about skew just yet
+ * TODO: apply skew
  */
-export const applyPropsToShape = (shape: Point[], props: CenteredShapeProps, heightRatio: number): Point[] => {
-    const {width, rotate, center} = props;
-    const height = props.height ?? (width * heightRatio);
-    const sized = sizeShape(shape, width, height);
-    const positioned = translateBy(sized, center);
-    return maybeRotate(positioned, rotate, center);
-}
+export const applyPropsToShape = (
+  shape: Point[],
+  props: CenteredShapeProps,
+  heightRatio: number
+): Point[] => {
+  const { width, rotate, center } = props;
+  const height = props.height ?? width * heightRatio;
+  const sized = resizePolygon(shape, width, height);
+  const positioned = translateBy(sized, center);
+  return maybeRotate(positioned, rotate, center);
+};
 
 /**
- * combine applyPropsToShape and polygonSvgString into one
+ * Combine applyPropsToShape and polygonSvgString into one.
  */
-export const createPointsString = (shape: Point[], props: CenteredShapeProps, heightRatio: number): string => {
-    return polygonSvgString(
-        applyPropsToShape(shape, props, heightRatio)
-    );
-}
+export const createPointsString = (
+  shape: Point[],
+  props: CenteredShapeProps,
+  heightRatio: number
+): string => polygonSvgString(applyPropsToShape(shape, props, heightRatio));
 
 /**
- * convert the two coordinates returned from geometric package polygonBounds function to a rectangle object
+ * Convert the two coordinates returned from geometric package polygonBounds() function to a
+ * rectangle object with x, y, width, height.
  */
-export const boundsToRect = ([topLeft, bottomRight]: [Point, Point]): XYRectangle => {
-    const [x, y] = topLeft;
-    const [x2, y2] = bottomRight;
-    return {
-        x,
-        y,
-        width: x2 - x,
-        height: y2 - y,
-    }
+export const boundsToRect = ([topLeft, bottomRight]: Line): XYRectangle => {
+  const [x, y] = topLeft;
+  const [x2, y2] = bottomRight;
+  return {
+    x,
+    y,
+    width: x2 - x,
+    height: y2 - y,
+  };
 };

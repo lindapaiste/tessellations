@@ -1,28 +1,26 @@
-import React, {ComponentType} from "react";
-import {Property} from "csstype";
-import {makeRange} from "../../util";
+import React, { ComponentType, CSSProperties } from "react";
+import { makeRange } from "../../util";
 
 /**
  * need to rewrite this for native because transform definitions are different
  */
 
 export interface RadialLayoutProps {
-    count: number;
+  count: number;
 }
 
-export type RadialRotateProps<P extends {}> = RadialLayoutProps & {
-    Element: ComponentType<P & { style: CreatedStyle }>;
-    elementProps: P;
-}
+type CreatedStyle = Required<
+  Pick<CSSProperties, "transform" | "transformOrigin">
+>;
 
-type CreatedStyle = {
-    transform?: Property.Transform;
-    transformOrigin?: Property.TransformOrigin;
-}
+export type RadialRotateProps<P> = RadialLayoutProps & {
+  Element: ComponentType<P & { style: CreatedStyle }>;
+  elementProps: P;
+};
 
 export const createStyle = (i: number, count: number): CreatedStyle => ({
-    transformOrigin: "center",
-    transform: `rotate(${i * 360 / count}deg)`,
+  transformOrigin: "center",
+  transform: `rotate(${(i * 360) / count}deg)`,
 });
 
 /**
@@ -32,16 +30,18 @@ export const createStyle = (i: number, count: number): CreatedStyle => ({
  *
  * what if I use children instead of a render prop?
  */
-export const RadialRotate = <P extends {}>({Element, elementProps, count}: RadialRotateProps<P>) => {
-    return (
-        <>
-            {makeRange(count).map(i => (
-                <Element
-                    key={i}
-                    {...elementProps}
-                    style={createStyle(i, count)} //can combine style
-                />
-            ))}
-        </>
-    )
-}
+export const RadialRotate = <P,>({
+  Element,
+  elementProps,
+  count,
+}: RadialRotateProps<P>): JSX.Element => (
+  <>
+    {makeRange(count).map((i) => (
+      <Element
+        key={i}
+        {...elementProps}
+        style={createStyle(i, count)} // can combine style
+      />
+    ))}
+  </>
+);

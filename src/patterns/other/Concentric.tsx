@@ -1,84 +1,109 @@
-import {Circle, SvgShapeProps} from "../../shapes";
-import React, {ComponentType, SVGAttributes} from "react";
-import {MaybeGenerate} from "../../util";
-import {Point} from "geometric";
+import React, { FunctionComponent } from "react";
+import { Point } from "geometric";
+import {
+  Circle,
+  componentByName,
+  ShapeName,
+  SvgShapeProps,
+} from "../../shapes";
+import { MaybeGenerate, resolveProp } from "../../util";
 
-export interface ConcentricProps {
-    /**
-     * Define the center point, which is (right now) the center for the whole Concentric and the center for each element.
-     */
-    center: Point;
-    /**
-     * An array of hexes in order from inside to outside.
-     * Will repeat if there are fewer colors than rings.
-     */
-    colors: string[];
-    /**
-     * The count of elements to render.
-     */
-    rings: number;
-    /**
-     * the thickness of each ring can be a constant, or a variable dependent on the index.
-     */
-    ringThickness: MaybeGenerate<number, number>;
-    /**
-     * Component to render the calculated props for each ring. Defaults to circle.
-     */
-    RenderRing?: ComponentType<RingProps>;
+/**
+ * The props which are computed by the pattern and passed down to each individual element.
+ */
+interface ComputedElementProps {
+  fill: string;
+  width: number;
+  center: Point;
+  index: number;
 }
 
 /**
- * Each "ring" of the Concentric gets standard shape props,
+ * Each 'ring' of the Concentric gets standard shape props,
  * but also gets a fill color and an index.
  */
-export type RingProps = SvgShapeProps & {
-    fill: string;
-    index: number;
+export type RingProps = SvgShapeProps & ComputedElementProps;
+
+export interface ConcentricProps {
+  /**
+   * Define the center point, which is (right now) the center for the whole Concentric
+   * pattern as well as the center for each element.
+   */
+  center: Point;
+  /**
+   * An array of hexes in order from inside to outside.
+   * Will repeat if there are fewer colors than count.
+   */
+  colors: string[];
+  /**
+   * The count of ring elements to render.
+   */
+  count: number;
+  /**
+   * The thickness of each ring can be a constant, or a variable dependent on the index.
+   */
+  thickness: MaybeGenerate<number, number>;
+  /**
+   * Component to render the calculated props for each ring. Defaults to Circle.
+   */
+  Element?: FunctionComponent<RingProps> | ShapeName;
+  /**
+   * Additional props to pass down to each element.
+   * Can be an object of props, or a function which receives the ComputedElementProps
+   * {width, fill, index, center}
+   */
+  elementProps?: MaybeGenerate<Partial<RingProps>, ComputedElementProps>;
 }
 
 /**
- * definitions and adding of ring thickness makes most sense from inside out,
- * but the actual rendering needs to be done from outside in in order for the inner elements to be visible
- * note: height is passed down to RenderRing, so require that if it is defined it must be a number and not a string
+ * Definitions and adding of ring thickness makes most sense from inside out,
+ * but the actual rendering needs to be done from outside in in order for the inner
+ * elements to be visible since later elements render on top of earlier ones.
  */
 export const Concentric = ({
-                               center,
-                               colors,
-                               rings,
-                               ringThickness,
-                               RenderRing = Circle,
-                               ...props
-                           }: ConcentricProps & SVGAttributes<any> & { height?: number; rotate?: number }) => {
+  center,
+  colors,
+  count,
+  thickness,
+  Element = Circle,
+  elementProps,
+}: ConcentricProps): JSX.Element => {
+  const RenderRing =
+    typeof Element === "string" ? componentByName(Element) : Element;
 
-    let elementProps: RingProps[] = [];
+  const elements: RingProps[] = [];
 
-    let cumulativeWidth = 0;
+  let cumulativeWidth = 0;
 
-    for (let i = 0; i < rings; i++) {
+  for (let i = 0; i < count; i++) {
+    const fill = colors[i % colors.length];
 
-        const fill = colors[i % colors.length];
+    // IDEA: also pass cumulative width to generator function?
+    const ringThickness =
+      typeof thickness === "number" ? thickness : thickness(i);
+    cumulativeWidth += ringThickness;
 
-        const thickness = typeof ringThickness === "number" ? ringThickness : ringThickness(i); //TODO: also pass
-                                                                                                // cumulative width
-        cumulativeWidth += thickness;
+    const computedProps = {
+      fill,
+      width: cumulativeWidth,
+      center,
+      index: i,
+    };
+    const additionalProps = elementProps
+      ? resolveProp(elementProps, computedProps)
+      : {};
 
-        elementProps.push({
-            fill,
-            width: cumulativeWidth,
-            center,
-            index: i,
-        });
-    }
+    elements.push({
+      ...computedProps,
+      ...additionalProps,
+    });
+  }
 
-    return (
-        <>
-            {[...elementProps].reverse().map(eProps => (
-                <RenderRing
-                    {...props}
-                    key={eProps.index}
-                    {...eProps}
-                />
-            ))}
-        </>
-    )
+  return (
+    <>
+      {[...elements].reverse().map((props) => (
+        <RenderRing key={props.index} {...props} />
+      ))}
+    </>
+  );
 };
