@@ -1,6 +1,7 @@
 import { Point } from "geometric";
+import { Size } from "../../shapes";
 import {
-  GetPointsPropsWithSize,
+  GetPointsProps,
   GridProps,
   GridSpacing,
   StandardLayout,
@@ -26,7 +27,7 @@ export const eitherToSpacing = (
 /**
  * When adding props from the layout, override the calculated with any explicitly passed.
  */
-export const applyLayoutProps = (props: GetPointsPropsWithSize): GridProps => ({
+export const applyLayoutProps = (props: GetPointsProps & Size): GridProps => ({
   ...eitherToSpacing(props),
   ...props,
 });
@@ -34,7 +35,7 @@ export const applyLayoutProps = (props: GetPointsPropsWithSize): GridProps => ({
 /**
  * if also passing in width and height, then can create and use the GridPlacements object externally
  */
-export const eitherToPoints = (props: GetPointsPropsWithSize): Point[] => {
+export const eitherToPoints = (props: GetPointsProps & Size): Point[] => {
   const grid = new GridPlacements(applyLayoutProps(props));
   return grid.getPoints();
 };

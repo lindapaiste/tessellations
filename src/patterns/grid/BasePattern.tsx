@@ -1,6 +1,6 @@
 import React, { ComponentType } from "react";
 import { Point } from "geometric";
-import { GetPointsPropsNoSize } from "./types";
+import { GetPointsProps } from "./types";
 import { MaybeGenerate, resolveProp } from "../../util";
 import { eitherToPoints } from "./mapProps";
 import { Size } from "../../shapes";
@@ -25,7 +25,7 @@ export type BasePatternProps<P> =
    * Width and height are not required because they can be access from the Background context.
    * But they can be provided to override the size from context.
    */
-  GetPointsPropsNoSize &
+  GetPointsProps &
     Partial<Size> & {
       /**
        * A component to render each element of the pattern.
@@ -58,8 +58,7 @@ export const Pattern = <P,>({
    * Use the size from BackgroundContext.
    * If a width and height are explicitly passed, they will override the context.
    */
-  const layoutProps: Size & Partial<GetPointsPropsNoSize> =
-    usePatternSize(props);
+  const layoutProps: Size & Partial<GetPointsProps> = usePatternSize(props);
   /**
    * If there is a width and a height on the element, then pass that to the layout.
    * TODO: how to handle function props - separate w/h from others?

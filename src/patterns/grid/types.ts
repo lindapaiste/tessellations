@@ -57,12 +57,11 @@ export type GridProps = GridSpacing & Size & GridOptionalProps;
 /**
  * The props required to generate a points array.
  * Can be a custom layout or a standard one.
- * Note: these two types are defined separately because Omit<_, keyof Size> doesn't work correctly
- * on a union.
+ *
+ * Note: Should add & Size where needed instead of including Size here
+ * because Omit<_, keyof Size> doesn't work correctly on a union.
  */
-export type GetPointsPropsNoSize = GridOptionalProps &
-  (GridSpacing | StandardLayout);
-export type GetPointsPropsWithSize = Size & GetPointsPropsNoSize;
+export type GetPointsProps = GridOptionalProps & (GridSpacing | StandardLayout);
 
 export interface PatternProps {
   elementColor?: string;
