@@ -48,7 +48,7 @@ export class GridPlacements implements GridSpacing, Size {
     const {
       spacing,
       spacingBetweenRows,
-      stagger = 0,
+      stagger,
       width,
       height,
       start,

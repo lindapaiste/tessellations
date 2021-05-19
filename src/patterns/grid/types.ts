@@ -31,7 +31,7 @@ export interface GridSpacing {
    * With each new row, move the elements to the right by this amount.
    * Default: 0.
    */
-  stagger?: number;
+  stagger: number;
 }
 
 export type GridOptionalProps = {

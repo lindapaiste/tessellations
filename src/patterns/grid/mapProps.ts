@@ -26,12 +26,20 @@ export const eitherToSpacing = (
 
 /**
  * When adding props from the layout, override the calculated with any explicitly passed.
+ * Set these each individually instead of spreading in case the props includes keys
+ * with values that are `undefined`.
  */
-export const applyLayoutProps = (props: GetPointsProps & Size): GridProps => ({
-  ...eitherToSpacing(props),
-  ...props,
-});
-
+export const applyLayoutProps = <T>(
+  props: T & GetPointsProps & Partial<GridProps>
+): GridSpacing & Omit<T, keyof GridSpacing> => {
+  const computed = eitherToSpacing(props);
+  return {
+    ...props,
+    spacing: props.spacing ?? computed.spacing,
+    spacingBetweenRows: props.spacingBetweenRows ?? computed.spacingBetweenRows,
+    stagger: props.stagger ?? computed.stagger,
+  };
+};
 /**
  * if also passing in width and height, then can create and use the GridPlacements object externally
  */
