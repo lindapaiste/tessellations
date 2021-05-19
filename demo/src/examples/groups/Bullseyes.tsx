@@ -59,6 +59,7 @@ export const Bullseyes = (): JSX.Element => (
       <Pattern
         spacingBetweenRows={100}
         spacing={100}
+        stagger={0}
         Element={Concentric}
         elementProps={{
           colors: randomHexes(3),

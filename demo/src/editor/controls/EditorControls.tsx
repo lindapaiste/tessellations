@@ -5,6 +5,7 @@ import { addRandomLayer, layer } from "../../state/slice";
 import { useDispatch, useSelector } from "../../state/store";
 import { BackgroundControls } from "./BackgroundControls";
 import { PatternLayerControls } from "./PatternLayerControls";
+import { LayerProvider } from "../LayerContext";
 
 const useStyles = makeStyles({
   buttonWrapper: {
@@ -26,7 +27,9 @@ export const EditorControls = (): JSX.Element => {
     <>
       <BackgroundControls />
       {layerIds.map((id) => (
-        <PatternLayerControls id={id} key={id} />
+        <LayerProvider value={id}>
+          <PatternLayerControls id={id} key={id} />
+        </LayerProvider>
       ))}
       <div className={classes.buttonWrapper}>
         <Button

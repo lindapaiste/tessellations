@@ -1,26 +1,26 @@
 import {
   Button,
   Grid,
+  makeStyles,
   MenuItem,
   TextField,
   Theme,
-  makeStyles,
 } from "@material-ui/core";
-import { GridSpacing, LayoutName, StandardLayout } from "patterns/patterns";
-import { ShapeName, SvgShapeProps } from "patterns/shapes";
 import { EntityId } from "@reduxjs/toolkit";
-import React from "react";
 import { startCase } from "lodash";
+import { ShapeName, SvgShapeProps } from "patterns/shapes";
+import React from "react";
 import { deleteLayer, layer, updateLayer } from "../../state/slice";
 import { useDispatch, useSelector } from "../../state/store";
+import { LayerSchema } from "../../state/types";
+import { SHAPE_NAMES } from "../../util/constants";
+import { PreviewShape } from "../preview/PreviewShape";
+import { ShapeIcon } from "../preview/ShapeIcon";
 import { ColorPicker } from "./ColorPicker";
 import { ControlSection } from "./ControlSection";
 import { InputSlider } from "./InputSlider";
-import { LayerSchema } from "../types";
-import { PreviewShape } from "../preview/PreviewShape";
 import { Section } from "./Section";
-import { ShapeIcon } from "../preview/ShapeIcon";
-import { LAYOUTS, SHAPE_NAMES } from "../../util/constants";
+import { SectionLayout } from "./SectionLayout";
 
 const useStyles = makeStyles((theme: Theme) => ({
   shapeIcon: {
@@ -56,7 +56,7 @@ export const PatternLayerControls = ({
     return null;
   }
 
-  const { layout, elementProps } = props;
+  const { elementProps } = props;
 
   const update = (changes: Partial<LayerSchema>) => {
     dispatch(updateLayer({ id, changes }));
@@ -68,12 +68,6 @@ export const PatternLayerControls = ({
         id,
         changes: { elementProps: { ...elementProps, ...changes } },
       })
-    );
-  };
-
-  const updateLayout = (changes: Partial<GridSpacing & StandardLayout>) => {
-    dispatch(
-      updateLayer({ id, changes: { layout: { ...layout, ...changes } } })
     );
   };
 
@@ -113,7 +107,9 @@ export const PatternLayerControls = ({
           <ControlSection label="Outline">
             <InputSlider
               value={+(elementProps.strokeWidth ?? 0)}
-              onChangeValue={(value) => updateElement({ strokeWidth: value })}
+              onChangeValue={(value: number) =>
+                updateElement({ strokeWidth: value })
+              }
               label="Thickness"
               id={`element-strokeWidth-${id}`}
             />
@@ -124,86 +120,35 @@ export const PatternLayerControls = ({
               id={`element-stroke-${id}`}
             />
           </ControlSection>
-          {/* <FormControlLabel
-                        control={
-                            <Checkbox
-                                checked={isFixedRatio}
-                                onChange={(e) => setIsFixedRatio(e.currentTarget.checked)}
-                                color="primary"
-                            />
-                        }
-                        label="Fixed Aspect Ratio"
-                    /> */}
           <ControlSection label="Size">
             <InputSlider
               value={elementProps.width ?? 0}
-              onChangeValue={(value) => updateElement({ width: value })}
+              onChangeValue={(value: number) => updateElement({ width: value })}
               label="Width"
               id={`element-width-${id}`}
             />
             <InputSlider
               value={elementProps.height ?? 0}
-              onChangeValue={(value) => updateElement({ height: value })}
+              onChangeValue={(value: number) =>
+                updateElement({ height: value })
+              }
               label="Height"
               id={`element-height-${id}`}
             />
           </ControlSection>
 
-          <ControlSection label="Layout">
-            <TextField
-              select
-              id={`select-layout-${id}`}
-              value={props.layout.layout}
-              onChange={(e) =>
-                updateLayout({ layout: e.target.value as LayoutName })
-              }
-              label="Standard Layout"
-            >
-              {LAYOUTS.map((name) => (
-                <MenuItem key={name} value={name}>
-                  {startCase(name)}
-                </MenuItem>
-              ))}
-            </TextField>
-            <InputSlider
-              value={layout.spacing ?? 1}
-              onChangeValue={(value) => {
-                if (value > 0) updateLayout({ spacing: value });
-              }}
-              label="Horizontal Spacing"
-              id={`layout-spacingH-${id}`}
-              min={1}
-            />
-            <InputSlider
-              value={layout.spacingBetweenRows ?? 1}
-              onChangeValue={(value) => {
-                if (value > 0) updateLayout({ spacingBetweenRows: value });
-              }}
-              label="Vertical Spacing"
-              id={`layout-spacingV-${id}`}
-              min={1}
-            />
-            <InputSlider
-              value={layout.stagger ?? 0}
-              onChangeValue={(value) => updateLayout({ stagger: value })}
-              label="Stagger"
-              id={`layout-stagger-${id}`}
-            />
-          </ControlSection>
+          <SectionLayout />
+
           <ControlSection label="Transform">
             <InputSlider
               value={elementProps.rotate ?? 0}
-              onChangeValue={(value) => updateElement({ rotate: value })}
+              onChangeValue={(value: number) =>
+                updateElement({ rotate: value })
+              }
               label="Rotate"
               id={`element-rotate-${id}`}
               max={360}
             />
-            {/* <InputSlider
-                        value={elementProps.skew ?? 0}
-                        onChangeValue={(value) => updateElement({skew: value})}
-                        label="Skew"
-                        id={`element-skew-${id}`}
-                    /> */}
           </ControlSection>
         </Grid>
       </Grid>

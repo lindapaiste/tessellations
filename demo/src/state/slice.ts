@@ -9,7 +9,7 @@ import {
 } from "@reduxjs/toolkit";
 import { BackgroundProps } from "patterns/background";
 import { last } from "lodash";
-import { LayerSchema, PatternSchema } from "../editor/types";
+import { CompleteLayout, LayerSchema, PatternSchema } from "./types";
 import { randomLayer } from "../util/random";
 
 /* eslint-disable no-param-reassign */
@@ -73,6 +73,19 @@ const editorSlice = createSlice({
      */
     updateLayer: (state, action: PayloadAction<Update<LayerSchema>>) => {
       layerAdapter.updateOne(state.layers, action.payload);
+    },
+    updateLayerLayout: (
+      state,
+      action: PayloadAction<Update<CompleteLayout>>
+    ) => {
+      const { id, changes } = action.payload;
+      const layer = state.layers.entities[id];
+      if (layer) {
+        layer.layout = {
+          ...layer.layout,
+          ...changes,
+        };
+      }
     },
     /**
      * Change the color of the background.

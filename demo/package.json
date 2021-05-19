@@ -1,8 +1,8 @@
 {
   "name": "@lindapaiste/react-svg-patterns-demo",
   "version": "1.0.0",
-  "description": "Example tile designs.",
-  "main": "src/index.js",
+  "description": "Interactive pattern editor and example tile designs.",
+  "main": "src/index.ts",
   "dependencies": {
     "@lindapaiste/array-edit": "^1.0.0",
     "@lindapaiste/react-svg-patterns": "file:../package",

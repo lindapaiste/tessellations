@@ -1,7 +1,7 @@
 import React from "react";
 import { ShapeSvg } from "patterns/shapes";
 import { makeStyles } from "@material-ui/core/styles";
-import { LayerSchema } from "../types";
+import { LayerSchema } from "../../state/types";
 
 /**
  * Render a single shape from the Pattern layer.

@@ -1,6 +1,6 @@
 import { ShapeName } from "patterns/shapes";
 import { LayoutName, ShapePatternProps } from "patterns/patterns";
-import { PatternSchema } from "../editor/types";
+import { PatternSchema } from "../state/types";
 
 /**
  * Convert back and forth between the props of a ShapePattern component

@@ -3,7 +3,7 @@ import { random, sample } from "lodash";
 import { LayoutName } from "patterns/patterns";
 import chroma from "chroma-js";
 import { EXAMPLE_SIZE, LAYOUTS, SHAPE_NAMES } from "./constants";
-import { PatternSchema } from "../editor/types";
+import { PatternSchema } from "../state/types";
 
 /**
  * Create a single random color
