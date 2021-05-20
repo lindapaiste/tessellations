@@ -25,7 +25,7 @@ const theme = responsiveFontSizes(
         main: "#80dcb8",
       },
       secondary: {
-        main: "#4c3bac",
+        main: "#5c42e7",
       },
     },
     typography: {

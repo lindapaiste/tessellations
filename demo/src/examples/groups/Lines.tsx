@@ -46,24 +46,31 @@ export const Lines = (): JSX.Element => (
 
     <ExampleTile>
       <ParallelLines
-        spacing={30}
+        spacing={60}
+        start={[0, 60]}
+        thickness={10}
+        angle={0}
+        color={randomColor()}
+      />
+      <ParallelLines
+        spacing={60}
         start={[0, 0]}
         thickness={10}
-        angle={45}
+        angle={90}
         color={randomColor()}
       />
       <ParallelLines
-        spacing={30}
-        start={[10 * Math.sqrt(2), 0]}
+        spacing={60}
+        start={[0, 90]}
         thickness={10}
-        angle={45}
+        angle={0}
         color={randomColor()}
       />
       <ParallelLines
-        spacing={30}
-        start={[20 * Math.sqrt(2), 0]}
+        spacing={60}
+        start={[30, 0]}
         thickness={10}
-        angle={45}
+        angle={90}
         color={randomColor()}
       />
     </ExampleTile>

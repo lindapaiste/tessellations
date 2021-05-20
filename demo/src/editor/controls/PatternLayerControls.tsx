@@ -22,6 +22,8 @@ import { InputSlider } from "./InputSlider";
 import { Section } from "./Section";
 import { SectionLayout } from "./SectionLayout";
 
+// TODO: checkboxes on height and rotate, input start x and y
+
 const useStyles = makeStyles((theme: Theme) => ({
   shapeIcon: {
     marginRight: theme.spacing(2),
