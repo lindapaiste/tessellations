@@ -8,7 +8,7 @@ import {
   setBackgroundColor,
 } from "../state/slice";
 import { useDispatch, useSelector } from "../state/store";
-import { EditableTile } from "./controls/EditableTile";
+import { EditableTile } from "./EditableTile";
 import { randomColor } from "../util/random";
 
 /**

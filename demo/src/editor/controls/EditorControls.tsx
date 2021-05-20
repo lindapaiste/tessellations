@@ -27,8 +27,8 @@ export const EditorControls = (): JSX.Element => {
     <>
       <BackgroundControls />
       {layerIds.map((id) => (
-        <LayerProvider value={id}>
-          <PatternLayerControls id={id} key={id} />
+        <LayerProvider value={id} key={id}>
+          <PatternLayerControls id={id} />
         </LayerProvider>
       ))}
       <div className={classes.buttonWrapper}>

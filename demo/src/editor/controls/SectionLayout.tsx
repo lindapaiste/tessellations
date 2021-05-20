@@ -1,4 +1,4 @@
-import { MenuItem, TextField } from "@material-ui/core";
+import { MenuItem } from "@material-ui/core";
 import { startCase } from "lodash";
 import { applyLayoutProps } from "patterns/patterns/grid/mapProps";
 import React, { useMemo } from "react";
@@ -10,6 +10,7 @@ import { LAYOUTS } from "../../util/constants";
 import { useLayerId } from "../LayerContext";
 import { OptionalEditProps } from "../types";
 import { ControlSection } from "./ControlSection";
+import { Dropdown } from "./Dropdown";
 import { InputSlider } from "./InputSlider";
 import { OptionalInputSlider } from "./OptionalInputSlider";
 
@@ -22,9 +23,9 @@ export const SectionLayout = (): JSX.Element | null => {
     () =>
       raw
         ? applyLayoutProps({
-            // use square as the default
-            layout: "square",
             ...raw,
+            // use square as the default
+            layout: raw.layout ?? "square",
           })
         : undefined,
     [raw]
@@ -59,13 +60,13 @@ export const SectionLayout = (): JSX.Element | null => {
 
   return (
     <ControlSection label="Layout">
-      <TextField {...props("layout")} select label="Standard Layout">
+      <Dropdown {...props("layout")} label="Standard Layout">
         {LAYOUTS.map((name) => (
           <MenuItem key={name} value={name}>
             {startCase(name)}
           </MenuItem>
         ))}
-      </TextField>
+      </Dropdown>
       <InputSlider {...props("spacing")} label="Horizontal Spacing" min={1} />
       <OptionalInputSlider
         {...props("spacingBetweenRows")}

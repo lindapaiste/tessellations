@@ -18,7 +18,7 @@ export const Bullseyes = (): JSX.Element => (
         layout="triangular"
         Element={Concentric}
         elementProps={{
-          colors: randomHexes(2),
+          colors: randomHexes(4),
           count: 4,
           thickness: 8,
         }}
@@ -38,7 +38,7 @@ export const Bullseyes = (): JSX.Element => (
         }}
       />
     </ExampleTile>
-    <ExampleTile>
+    {/* <ExampleTile>
       <Pattern
         spacingBetweenRows={100}
         spacing={100}
@@ -54,7 +54,7 @@ export const Bullseyes = (): JSX.Element => (
           },
         }}
       />
-    </ExampleTile>
+    </ExampleTile> */}
     <ExampleTile>
       <Pattern
         spacingBetweenRows={100}

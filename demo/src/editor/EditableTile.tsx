@@ -1,14 +1,22 @@
 import { Button, Grid } from "@material-ui/core";
+import { makeStyles, Theme } from "@material-ui/core/styles";
 import React, { useRef } from "react";
-import { Theme, makeStyles } from "@material-ui/core/styles";
-import { EditorControls } from "./EditorControls";
-import { RenderTile } from "../preview/RenderTile";
-import { downloadSVG } from "../../util/export";
+import { downloadSVG } from "../util/export";
+import { EditorControls } from "./controls/EditorControls";
+import { RenderPlaceholder, RenderTile } from "./preview/RenderTile";
 
 const useStyles = makeStyles((theme: Theme) => ({
-  preview: {
+  previewColumn: {
     marginTop: "2rem",
     flexShrink: 1,
+    position: "relative",
+    // fill the width below breakpoint
+    [theme.breakpoints.down("sm")]: {
+      width: "100%",
+    },
+  },
+  previewContent: {
+    position: "fixed",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -17,9 +25,8 @@ const useStyles = makeStyles((theme: Theme) => ({
       maxWidth: "100%",
       height: "auto",
     },
-    // fill the width below breakpoint
     [theme.breakpoints.down("sm")]: {
-      width: "100%",
+      position: "relative",
     },
   },
   button: {
@@ -49,15 +56,18 @@ export const EditableTile = (): JSX.Element => {
 
   return (
     <Grid container spacing={1}>
-      <Grid item className={classes.preview}>
-        <RenderTile ref={svgRef} />
-        <Button
-          className={classes.button}
-          onClick={onClickDownload}
-          variant="outlined"
-        >
-          Download
-        </Button>
+      <Grid item className={classes.previewColumn}>
+        <RenderPlaceholder />
+        <div className={classes.previewContent}>
+          <RenderTile ref={svgRef} />
+          <Button
+            className={classes.button}
+            onClick={onClickDownload}
+            variant="outlined"
+          >
+            Download
+          </Button>
+        </div>
       </Grid>
       <Grid item sm={12} md className={classes.controls}>
         <EditorControls />

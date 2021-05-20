@@ -1,19 +1,24 @@
-import { ParallelLines, ShapePattern } from "patterns/patterns";
+import { ShapePattern } from "patterns/patterns";
 import React from "react";
-import { makePlus } from "patterns/shapes/polygon/Plus";
-import { EditableLayeredPattern } from "../helpers/EditableLayeredPattern";
-import { ExampleTile } from "../helpers/ExampleTile";
-import { Group } from "../helpers/Group";
 import { randomColor } from "../../util/random";
+import { EditableLayeredPattern } from "../helpers/EditableLayeredPattern";
+import { Group } from "../helpers/Group";
 
+/**
+ * Note: temporarily converted <ParallelLines/> to rectangle patterns
+ * so that they can be edited as shape layers.
+ */
 export const Layered = (): JSX.Element => (
   <Group title="Layered Patterns">
-    <ExampleTile>
-      <ParallelLines
+    <EditableLayeredPattern>
+      <ShapePattern
         spacing={30}
-        thickness={2}
-        angle={90}
-        color={randomColor()}
+        spacingBetweenRows={300}
+        start={[0, 150]}
+        shape="rectangle"
+        elementWidth={2}
+        elementHeight={300}
+        elementColor={randomColor()}
       />
       <ShapePattern
         spacing={60}
@@ -22,7 +27,7 @@ export const Layered = (): JSX.Element => (
         elementWidth={40}
         elementColor={randomColor()}
       />
-    </ExampleTile>
+    </EditableLayeredPattern>
 
     <EditableLayeredPattern>
       <ShapePattern
@@ -54,19 +59,23 @@ export const Layered = (): JSX.Element => (
       />
     </EditableLayeredPattern>
 
-    <ExampleTile>
-      <ParallelLines
-        color="black"
-        angle={90}
+    <EditableLayeredPattern>
+      <ShapePattern
+        layout="square"
+        shape="rectangle"
         spacing={50}
-        thickness={10}
+        elementWidth={10}
+        elementHeight={50}
+        elementColor="black"
         start={[25, 25]}
       />
-      <ParallelLines
-        color="black"
-        angle={0}
+      <ShapePattern
+        layout="square"
+        shape="rectangle"
         spacing={50}
-        thickness={10}
+        elementWidth={50}
+        elementHeight={10}
+        elementColor="black"
         start={[25, 25]}
       />
       <ShapePattern
@@ -81,7 +90,7 @@ export const Layered = (): JSX.Element => (
           stroke: "black",
         }}
       />
-    </ExampleTile>
+    </EditableLayeredPattern>
 
     <EditableLayeredPattern>
       <ShapePattern
@@ -102,35 +111,23 @@ export const Layered = (): JSX.Element => (
       />
     </EditableLayeredPattern>
 
-    <ExampleTile>
+    <EditableLayeredPattern>
       <ShapePattern
-        shape={makePlus(0.1)}
-        spacing={60}
+        shape="square"
         layout="square"
-        elementWidth={40}
-        elementProps={{
-          rotate: 45,
-        }}
+        spacing={60}
+        elementWidth={50}
         elementColor={randomColor()}
       />
       <ShapePattern
-        layout="diagonal"
+        layout="square"
         spacing={60}
         shape="circle"
-        start={[30, 0]}
-        elementWidth={5}
+        start={[30, 30]}
+        elementWidth={23}
         elementColor={randomColor()}
       />
-      <ShapePattern
-        layout="square"
-        spacing={60}
-        shape="rhombus"
-        start={[0, 0]}
-        elementColor={randomColor()}
-        elementWidth={10}
-        elementHeight={10}
-      />
-    </ExampleTile>
+    </EditableLayeredPattern>
 
     <EditableLayeredPattern>
       <ShapePattern

@@ -1,6 +1,6 @@
-import React, { FC } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import React, { FC } from "react";
 
 const useStyles = makeStyles({
   section: {
@@ -12,6 +12,10 @@ const useStyles = makeStyles({
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "center",
+    "& > svg": {
+      flexGrow: 1,
+      height: "auto",
+    },
   },
   heading: {
     textAlign: "center",

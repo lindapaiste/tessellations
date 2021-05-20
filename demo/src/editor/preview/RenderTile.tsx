@@ -23,3 +23,8 @@ export const RenderTile = forwardRef<SVGSVGElement, Record<string, unknown>>(
   }
 );
 RenderTile.displayName = "RenderTile";
+
+export const RenderPlaceholder = (): JSX.Element => {
+  const width = useSelector((state) => state.background.width);
+  return <div style={{ width }} />;
+};

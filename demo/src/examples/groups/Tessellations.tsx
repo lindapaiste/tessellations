@@ -55,5 +55,26 @@ export const Tessellations = (): JSX.Element => (
         }}
       />
     </ExampleTile>
+    <EditablePatternTile
+      shape="houndstooth"
+      elementWidth={100}
+      spacing={80}
+      spacingBetweenRows={40}
+      stagger={40}
+      elementProps={{
+        strokeWidth: 4,
+        stroke: randomColor(),
+      }}
+    />
+    <EditablePatternTile
+      shape="houndscross"
+      elementWidth={100}
+      layout="diagonal"
+      spacing={100}
+      elementProps={{
+        strokeWidth: 4,
+        stroke: randomColor(),
+      }}
+    />
   </Group>
 );
