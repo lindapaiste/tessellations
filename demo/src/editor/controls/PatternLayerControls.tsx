@@ -49,9 +49,6 @@ export const PatternLayerControls = ({
 
   const props = useSelector((state) => layer.selectById(state, id));
 
-  // TODO: support locking of aspect ratio
-  // const [isFixedRatio, setIsFixedRatio] = useState(true);
-
   if (!props) {
     // eslint-disable-next-line no-console
     console.error(`Invalid layer id ${id}`);

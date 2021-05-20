@@ -14,21 +14,21 @@ export interface LineRenderProps {
 
 export type LineLayoutProps =
   /**
-   * size of the target tile to cover
+   * Size of the target tile to cover.
    */
   Partial<Size> & {
     /**
-     * spacing goes from center to center so thickness shouldn't matter
+     * Spacing goes from center to center so thickness shouldn't matter
      *
-     * important: is spacing in the x-direction, or perpendicular to the lines?
+     * Important: is spacing in the x-direction, or perpendicular to the lines?
      */
     spacing: number;
     /**
-     * degrees offset from horizontal in the clockwise direction.  defaults to 0
+     * Degrees offset from horizontal in the clockwise direction.  Defaults to 0.
      */
     angle?: number;
     /**
-     * place the first line through this point.  defaults to tile center
+     * Place the first line through this point.  Defaults to tile center.
      */
     start?: Point;
   };
