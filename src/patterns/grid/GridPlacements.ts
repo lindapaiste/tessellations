@@ -130,7 +130,7 @@ export class GridPlacements implements GridSpacing, Size {
     x %= this.spacing;
     // The conditional before decrement shouldn't be checking this current x,
     // It should be checking if the previous x would be ok, ie. should be decremented to.
-    while (x - this.spacing > -0.5 * this.elementWidth) {
+    while (x - this.spacing >= -0.5 * this.elementWidth) {
       x -= this.spacing;
     }
     return [x, point[1]];

@@ -59,6 +59,7 @@ export const ShapePattern = ({
     <Pattern
       {...props} // passes through the start point
       // want to make sure that elementHeight from shape is passed down
+      elementWidth={elementWidth}
       elementHeight={elementHeight}
       spacing={spacing}
       spacingBetweenRows={spacingBetweenRows}
