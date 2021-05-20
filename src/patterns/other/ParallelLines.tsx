@@ -3,7 +3,7 @@ import { LineDef, LineFromAngle } from "@lindapaiste/geometry/lib/line/types";
 import React, { SVGAttributes } from "react";
 import { Line as LineObj } from "@lindapaiste/geometry";
 import { toRectangleClass } from "@lindapaiste/geometry/lib/rectangle/util";
-import { eitherToTuple as toTuple } from "@lindapaiste/geometry/lib/points/convert";
+import { pointToTuple as toTuple } from "@lindapaiste/geometry/lib/points/convert";
 import { Size, XYRectangle } from "../../shapes";
 import { usePatternSize } from "../usePatternSize";
 

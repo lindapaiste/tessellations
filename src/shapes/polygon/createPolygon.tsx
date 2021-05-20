@@ -44,7 +44,12 @@ const createPolygonRender =
     const { width, height, rotate, center, ...passedDown } = props;
     const points = createPointsString(
       shape,
-      { width, height, rotate, center },
+      {
+        width,
+        height,
+        rotate,
+        center,
+      },
       heightRatio
     );
 
@@ -52,7 +57,8 @@ const createPolygonRender =
   };
 
 /**
- * Convert a PolygonSchema definition to a standardized ShapeComponent, which applies to non-polygon shapes (like circles).
+ * Convert a PolygonSchema definition to a standardized ShapeComponent,
+ * which also applies to non-polygon shapes (like circles).
  */
 export const createPolygonShape = (schema: PolygonSchema): ShapeComponent => {
   const Render: ShapeComponent = createPolygonRender(schema);

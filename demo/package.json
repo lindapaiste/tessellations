@@ -6,15 +6,15 @@
   "dependencies": {
     "@lindapaiste/array-edit": "^1.0.0",
     "@lindapaiste/geometry": "^1.0.10",
-    "@lindapaiste/react-svg-patterns": "file:../",
     "@material-ui/core": "^4.11.4",
     "@material-ui/icons": "^4.11.2",
     "@reduxjs/toolkit": "^1.5.1",
     "chroma-js": "2.1.0",
     "geometric": "^2.2.6",
     "lodash": "^4.17.21",
+    "patterns": "file:../src/",
     "react": "^17.0.2",
-    "react-dom": "^17.0.0",
+    "react-dom": "^17.0.2",
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
     "redux": "^4.1.0"
@@ -45,7 +45,7 @@
     "lint": "eslint src/**/*",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
-    "eject": "react-app-rewired eject"
+    "eject": "react-scripts eject"
   },
   "browserslist": {
     "production": [

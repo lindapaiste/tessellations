@@ -1,6 +1,10 @@
-## Pattern Creator
+# Pattern Creator
 
 This package of React components enables the creation of complex layered designs from standard geometric shapes.
+
+The core patterns package is found in the `./src` directory.  The `./demo` directory contains the code for an online pattern creator which you can play with at [patterns.lindapaiste.com](https://patterns.lindapaiste.com/). See what you can create!
+
+These patterns are highly flexible -- minor changes to props like `spacing` can lead to radically different designs. Check out the [examples](https://patterns.lindapaiste.com/examples) for inspiration.
 
 # Components
 
@@ -70,4 +74,5 @@ All shapes accept the same standardized props.
 | height | `number` | No | The height of the shape.  If not provided, it will be calculated from the `width` based on the ratio defined by the shape.
 | rotate | `number` | No |  Degrees of rotation to apply to the shape. Default `0`. |
 | width | `number` | Yes | The width of the shape.
-They can also accept and pass down any props of the underlying DOM element, such as `<polygon>` or `<ellipse>`. Typical props: `fill`, `stroke`, and `strokeWidth`.
+
+Shapes can also accept and pass down any props of the underlying DOM element, such as `<polygon>` or `<ellipse>`. Typical props: `fill`, `stroke`, and `strokeWidth`.

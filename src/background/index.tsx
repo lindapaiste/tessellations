@@ -49,7 +49,7 @@ type Props = PropsWithChildren<BackgroundProps & JSX.IntrinsicElements["svg"]>;
  *
  * Forwards a ref to the underlying DOM <svg> element.
  *
- * TODO: investigate pros and cons of setting the background through style: backgroundColor vs <rect>
+ * TODO: investigate pros and cons of setting the background via style: backgroundColor vs <rect>
  */
 export const Background = forwardRef<SVGSVGElement, Props>(
   ({ children, ...props }, ref) => {

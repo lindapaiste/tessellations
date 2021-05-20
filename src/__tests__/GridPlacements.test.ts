@@ -30,9 +30,8 @@ describe("GridPlacements", () => {
    * Helper makes sure that all points are included,
    * but isn't concerned with unnecessary extras.
    */
-  const containsAll = (points: Point[], required: Point[]): boolean => {
-    return required.every((a) => points.find(pointMatches(a)) !== undefined);
-  };
+  const containsAll = (points: Point[], required: Point[]): boolean =>
+    required.every((a) => points.find(pointMatches(a)) !== undefined);
 
   it("Creates center points based on spacing values", () => {
     const grid = new GridPlacements(props);

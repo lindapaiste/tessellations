@@ -10,8 +10,8 @@ import { EditorState, reducer } from "./slice";
  * Function can be used to create a store with some values already defined.
  */
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export const createStore = (preloadedState?: DeepPartial<EditorState>) => {
-  return configureStore({
+export const createStore = (preloadedState?: DeepPartial<EditorState>) =>
+  configureStore({
     preloadedState,
     reducer,
     // don't need thunk, so can remove the middleware
@@ -20,7 +20,6 @@ export const createStore = (preloadedState?: DeepPartial<EditorState>) => {
         thunk: false,
       }),
   });
-};
 
 // Infer typescript types from the store.
 export type StoreType = ReturnType<typeof createStore>;

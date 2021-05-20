@@ -18,16 +18,14 @@ export const Dropdown = <T extends string>({
   onChangeValue,
   children,
   label,
-}: Props<T>): JSX.Element => {
-  return (
-    <TextField
-      label={label}
-      select
-      value={value}
-      id={id}
-      onChange={(e) => onChangeValue(e.target.value as T)}
-    >
-      {children}
-    </TextField>
-  );
-};
+}: Props<T>): JSX.Element => (
+  <TextField
+    label={label}
+    select
+    value={value}
+    id={id}
+    onChange={(e) => onChangeValue(e.target.value as T)}
+  >
+    {children}
+  </TextField>
+);

@@ -13,9 +13,8 @@ export const randomColor = (): string => chroma.random().hex();
 /**
  * Create an array of random colors
  */
-export const randomHexes = (count: number): string[] => {
-  return Array.from({ length: count }, randomColor);
-};
+export const randomHexes = (count: number): string[] =>
+  Array.from({ length: count }, randomColor);
 
 /**
  * Get a random shape name

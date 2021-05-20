@@ -9,28 +9,26 @@ import { PatternSchema } from "../state/types";
 
 export const patternPropsToSchema = (
   props: ShapePatternProps & { shape: ShapeName }
-): PatternSchema => {
-  return {
-    shape: props.shape,
-    type: "pattern",
-    layout: {
-      // needs some sort of type assertion because it is not understood
-      // that one branch of the union must be true.
-      layout: props.layout as LayoutName,
-      // pattern uses the width if no value set
-      spacing: props.spacing || props.elementWidth,
-      spacingBetweenRows: props.spacingBetweenRows,
-      stagger: props.stagger,
-      start: props.start,
-    },
-    elementProps: {
-      width: props.elementWidth,
-      height: props.elementHeight,
-      fill: props.elementColor,
-      ...props.elementProps,
-    },
-  };
-};
+): PatternSchema => ({
+  shape: props.shape,
+  type: "pattern",
+  layout: {
+    // needs some sort of type assertion because it is not understood
+    // that one branch of the union must be true.
+    layout: props.layout as LayoutName,
+    // pattern uses the width if no value set
+    spacing: props.spacing || props.elementWidth,
+    spacingBetweenRows: props.spacingBetweenRows,
+    stagger: props.stagger,
+    start: props.start,
+  },
+  elementProps: {
+    width: props.elementWidth,
+    height: props.elementHeight,
+    fill: props.elementColor,
+    ...props.elementProps,
+  },
+});
 
 export const schemaToPatternProps = ({
   shape,

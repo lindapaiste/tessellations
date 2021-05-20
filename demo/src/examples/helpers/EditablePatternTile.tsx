@@ -13,10 +13,8 @@ import { randomColor } from "../../util/random";
  */
 export const EditablePatternTile = (
   props: ShapePatternProps & { shape: ShapeName }
-): JSX.Element => {
-  return (
-    <EditableLayeredPattern>
-      <ShapePattern elementColor={randomColor()} {...props} />
-    </EditableLayeredPattern>
-  );
-};
+): JSX.Element => (
+  <EditableLayeredPattern>
+    <ShapePattern elementColor={randomColor()} {...props} />
+  </EditableLayeredPattern>
+);

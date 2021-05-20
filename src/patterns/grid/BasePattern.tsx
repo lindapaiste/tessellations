@@ -38,7 +38,7 @@ export type BasePatternProps<P> =
        * Note: using 'Omit' here requires an assertion in the component which would not be necessary
        * otherwise, but it allows for better type inference when using the Pattern component.
        *
-       * TODO: allow elementProps to be left off if there are no additional props required by Element.
+       * TODO: allow elementProps to be left off if no additional props are required by Element.
        */
       elementProps: MaybeGenerate<
         Omit<P, keyof PatternCreatesProps> & Partial<Size>,

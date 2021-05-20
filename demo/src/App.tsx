@@ -51,16 +51,14 @@ const theme = responsiveFontSizes(
   })
 );
 
-export const App = (): JSX.Element => {
-  return (
-    <Provider store={store}>
-      <MuiThemeProvider theme={theme}>
-        <BrowserRouter>
-          <NavigationTabs>
-            <Routing />
-          </NavigationTabs>
-        </BrowserRouter>
-      </MuiThemeProvider>
-    </Provider>
-  );
-};
+export const App = (): JSX.Element => (
+  <Provider store={store}>
+    <MuiThemeProvider theme={theme}>
+      <BrowserRouter>
+        <NavigationTabs>
+          <Routing />
+        </NavigationTabs>
+      </BrowserRouter>
+    </MuiThemeProvider>
+  </Provider>
+);
