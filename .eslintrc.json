@@ -6,17 +6,22 @@
     "@typescript-eslint"
   ],
   "extends": [
-    "react-app",
     "eslint:recommended",
-    "plugin:react/recommended"
+    "plugin:react/recommended",
+    "airbnb-typescript-prettier"
   ],
   "rules": {
-    "sort-imports": "warn",
     "import/no-cycle": "warn",
+    "import/no-unresolved": "off",
+    "import/prefer-default-export": "off",
     "react/prop-types": "off",
+    "react/require-default-props": "off",
+    "react/jsx-props-no-spreading": "off",
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": "warn",
-    "no-undef": "off"
+    "no-undef": "off",
+    "no-plusplus": "off",
+    "prettier/prettier": "warn"
   },
   "settings": {
     "react": {

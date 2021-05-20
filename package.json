@@ -14,18 +14,24 @@
   },
   "devDependencies": {
     "@types/geometric": "^2.2.0",
-    "@types/react": "^16.9.45",
+    "@types/jest": "^26.0.23",
+    "@types/react": "^17.0.0",
     "@typescript-eslint/eslint-plugin": "^4.23.0",
     "@typescript-eslint/parser": "^4.23.0",
+    "eslint": "^7.26.0",
+    "eslint-config-airbnb-typescript-prettier": "^4.2.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-react": "^7.23.2",
+    "prettier": "^2.3.0",
     "typescript": "^4.2.0"
   },
   "peerDependencies": {
-    "react": "16.13.1"
+    "react": "^17.0.0"
   },
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "lint": "eslint src/**/*",
+    "prettier": "prettier --write src/**/*"
   },
   "main": "./src/index.js",
   "types": "./build/index.d.ts"
