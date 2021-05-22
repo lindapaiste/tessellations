@@ -18,6 +18,7 @@ The `<Background>` is the outermost component in a layered pattern. It creates t
 | --- | --- | --- | --- |
 | backgroundColor | `string` | No | If provided, apply a background color to the `<svg>` element. |
 | height | `number` | Yes | Intrinsic height in pixels of the `<svg>` element. Will also be used as the `viewbox` height. |
+| title | `string` | No | If provided, include a `<title>` element in the `<svg>`. This is hidden from view and is the equivalent of the `alt` property of an image. |
 | width | `number` | Yes | Intrinsic width in pixels of the `<svg>` element. Will also be used as the `viewbox` width. |
 
 Also accepts and passes down any props of the underlying DOM `<svg>` element, including `ref`.

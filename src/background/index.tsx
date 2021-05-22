@@ -20,6 +20,12 @@ export interface BackgroundProps {
    * [Optional] If provided, apply a background color to the svg element.
    */
   backgroundColor?: string;
+  /**
+   * [Optional] If provided, include a <title> element in the <svg>.
+   * This is hidden from view and is the equivalent of the "alt"
+   * property of an image.
+   */
+  title?: string;
 }
 
 /**
@@ -53,7 +59,7 @@ type Props = PropsWithChildren<BackgroundProps & JSX.IntrinsicElements["svg"]>;
  */
 export const Background = forwardRef<SVGSVGElement, Props>(
   ({ children, ...props }, ref) => {
-    const { width, height, backgroundColor, ...rest } = props;
+    const { width, height, backgroundColor, title, ...rest } = props;
     return (
       <BackgroundContext.Provider value={props}>
         <svg
@@ -63,6 +69,7 @@ export const Background = forwardRef<SVGSVGElement, Props>(
           width={width}
           height={height}
         >
+          {title !== undefined && <title>{title}</title>}
           {backgroundColor !== undefined && (
             <rect width={width} height={height} fill={backgroundColor} />
           )}
