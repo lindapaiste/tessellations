@@ -11,3 +11,4 @@ export { Rhombus } from "./polygon/Rhombus";
 export { HoundsCross, HoundsTooth } from "./polygon/HoundsTooth";
 export { Triangle } from "./polygon/Triangle";
 export { Plus } from "./polygon/Plus";
+export { Capsule } from "./curved/Capsule";

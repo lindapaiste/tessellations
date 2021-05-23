@@ -23,17 +23,18 @@ type ShapeStory = Story<Props>;
 const Template: ShapeStory = (args) => <ShapeSvg {...args} />;
 
 export const {
-  hexagon,
-  square,
-  houndscross,
-  plus,
-  houndstooth,
   arrow,
+  capsule,
   circle,
+  hexagon,
+  houndscross,
+  houndstooth,
   octagon,
   pentagon,
+  plus,
   rectangle,
   rhombus,
+  square,
   triangle,
 } = Object.fromEntries(
   shapeNames.map((name) => {
