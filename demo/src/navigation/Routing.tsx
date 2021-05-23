@@ -1,5 +1,6 @@
 import { Route, Switch } from "react-router-dom";
-import React from "react";
+import React, { Suspense } from "react";
+import { LinearProgress } from "@material-ui/core";
 import { sortBy } from "lodash";
 import { PAGES } from "./pages";
 
@@ -10,9 +11,11 @@ import { PAGES } from "./pages";
 const routes = sortBy(PAGES, (p) => p.path.length).reverse();
 
 export const Routing = (): JSX.Element => (
-  <Switch>
-    {routes.map((props) => (
-      <Route key={props.path} {...props} />
-    ))}
-  </Switch>
+  <Suspense fallback={() => <LinearProgress color="primary" />}>
+    <Switch>
+      {routes.map((props) => (
+        <Route key={props.path} {...props} />
+      ))}
+    </Switch>
+  </Suspense>
 );

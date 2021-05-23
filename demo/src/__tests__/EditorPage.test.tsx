@@ -1,6 +1,6 @@
 import { fireEvent, screen } from "@testing-library/react";
 import React from "react";
-import { EditorPage } from "../editor/EditorPage";
+import EditorPage from "../editor/EditorPage";
 import { inputElement, render } from "./test-utils";
 
 describe("Editor page", () => {

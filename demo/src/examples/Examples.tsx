@@ -14,25 +14,27 @@ import { RhombusSizes } from "./groups/RhombusSizes";
 import { SpacingHexagons } from "./groups/SpacingHexagons";
 import { Tessellations } from "./groups/Tessellations";
 
-export const Examples = (): JSX.Element => (
-  <div
-    style={{
-      flex: 1,
-    }}
-  >
-    <PolkaDotLayouts />
-    <RhombusSizes />
-    <SpacingHexagons />
-    <Outlines />
-    <Checkers />
-    <Negative />
-    <Tessellations />
-    <Bricks />
-    <Lines />
-    <OverlapLines />
-    <Layered />
-    <Bullseyes />
-    <Radial />
-    <AltPolka />
-  </div>
-);
+export default function Examples(): JSX.Element {
+  return (
+    <div
+      style={{
+        flex: 1,
+      }}
+    >
+      <PolkaDotLayouts />
+      <RhombusSizes />
+      <SpacingHexagons />
+      <Outlines />
+      <Checkers />
+      <Negative />
+      <Tessellations />
+      <Bricks />
+      <Lines />
+      <OverlapLines />
+      <Layered />
+      <Bullseyes />
+      <Radial />
+      <AltPolka />
+    </div>
+  );
+}

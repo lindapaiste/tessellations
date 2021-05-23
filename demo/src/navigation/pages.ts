@@ -1,6 +1,4 @@
-import { ComponentType, ReactNode } from "react";
-import { EditorPage } from "../editor/EditorPage";
-import { Examples } from "../examples/Examples";
+import React, { ComponentType, ReactNode } from "react";
 import { PATHS } from "../util/constants";
 
 /**
@@ -18,12 +16,12 @@ export interface Page {
 export const PAGES: Page[] = [
   {
     path: PATHS.EDITOR,
-    component: EditorPage,
+    component: React.lazy(() => import("../editor/EditorPage")),
     title: "Editor",
   },
   {
     path: PATHS.EXAMPLES,
-    component: Examples,
+    component: React.lazy(() => import("../examples/Examples")),
     title: "Examples",
   },
 ];

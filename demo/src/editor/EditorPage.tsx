@@ -21,7 +21,7 @@ import { randomColor } from "../util/random";
  * 3) Otherwise, create an editor with a randomly-generated pattern containing one layer.
  * Want to allow the user to remove all layers, so only do the adding one time.
  */
-export const EditorPage = (): JSX.Element => {
+export default function EditorPage(): JSX.Element {
   const { state } = useLocation<PassedState | undefined>();
 
   const [didSetup, setDidSetup] = useState(false);
@@ -48,4 +48,4 @@ export const EditorPage = (): JSX.Element => {
   }, [state, layerCount, didSetup, dispatch]);
 
   return <EditableTile />;
-};
+}
