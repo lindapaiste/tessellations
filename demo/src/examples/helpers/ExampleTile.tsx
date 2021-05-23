@@ -7,6 +7,7 @@ import { randomColor } from "../../util/random";
 interface Props {
   onClick?: MouseEventHandler;
   backgroundColor?: string;
+  title?: string;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -27,6 +28,7 @@ export const ExampleTile = ({
   children,
   onClick,
   backgroundColor,
+  title,
 }: PropsWithChildren<Props>): JSX.Element => {
   const classes = useStyles();
   return (
@@ -36,6 +38,7 @@ export const ExampleTile = ({
       backgroundColor={backgroundColor ?? randomColor()}
       onClick={onClick}
       className={classes.tile}
+      title={title}
     >
       {children}
     </Background>

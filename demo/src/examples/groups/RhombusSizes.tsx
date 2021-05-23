@@ -11,6 +11,7 @@ export const RhombusSizes = (): JSX.Element => (
         shape="rhombus"
         spacing={60}
         layout="triangular"
+        title={`Rhombus width: ${elementWidth}`}
       />
     ))}
   </Group>

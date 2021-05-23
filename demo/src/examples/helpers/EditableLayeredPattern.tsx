@@ -13,8 +13,10 @@ import { EXAMPLE_SIZE, PATHS } from "../../util/constants";
  */
 export const EditableLayeredPattern = ({
   children,
+  title,
 }: {
   children: JSX.Element | JSX.Element[];
+  title?: string;
 }): JSX.Element => {
   const history = useHistory<PassedState>();
 
@@ -36,7 +38,11 @@ export const EditableLayeredPattern = ({
     });
 
   return (
-    <ExampleTile backgroundColor={backgroundColor} onClick={onClick}>
+    <ExampleTile
+      backgroundColor={backgroundColor}
+      onClick={onClick}
+      title={title}
+    >
       {children}
     </ExampleTile>
   );

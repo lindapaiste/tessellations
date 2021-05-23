@@ -11,10 +11,13 @@ import { randomColor } from "../../util/random";
  * Takes the pattern properties as props
  * rather than having a pattern element as a child.
  */
-export const EditablePatternTile = (
-  props: ShapePatternProps & { shape: ShapeName }
-): JSX.Element => (
-  <EditableLayeredPattern>
+export const EditablePatternTile = ({
+  title,
+  ...props
+}: ShapePatternProps & { shape: ShapeName } & {
+  title?: string;
+}): JSX.Element => (
+  <EditableLayeredPattern title={title}>
     <ShapePattern elementColor={randomColor()} {...props} />
   </EditableLayeredPattern>
 );

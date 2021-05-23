@@ -6,14 +6,20 @@ import {
 } from "react-redux";
 import { EditorState, reducer } from "./slice";
 
+// Trivial right now because there is no combining of slices.
+export const rootReducer = reducer;
+
+// Is just EditorState right now, but could potentially change.
+export type RootState = ReturnType<typeof rootReducer>;
+
 /**
  * Function can be used to create a store with some values already defined.
  */
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export const createStore = (preloadedState?: DeepPartial<EditorState>) =>
+export const createStore = (preloadedState?: DeepPartial<RootState>) =>
   configureStore({
     preloadedState,
-    reducer,
+    reducer: rootReducer,
     // don't need thunk, so can remove the middleware
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
