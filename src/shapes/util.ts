@@ -1,5 +1,5 @@
 import { Line, Point, polygonRotate } from "geometric";
-import { CenteredShapeProps, Size, XYRectangle } from "./types";
+import { CenteredShapeProps, ShapeComponent, Size, XYRectangle } from "./types";
 
 /**
  * Convert an array of polygon points into a string
@@ -96,3 +96,14 @@ export const boundsToRect = ([topLeft, bottomRight]: Line): XYRectangle => {
     height: y2 - y,
   };
 };
+
+/**
+ * In the following order of preference:
+ * 1. Return the explicitly defined height.
+ * 2. Compute the height from the width based on the shape configuration.
+ * 3. Return a height equal to the width.
+ */
+export const getShapeHeight = (
+  Component: ShapeComponent,
+  { height, width }: { width: number; height?: number }
+) => height ?? Component.standardHeight?.(width) ?? width;

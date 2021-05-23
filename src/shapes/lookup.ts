@@ -32,3 +32,10 @@ export const resolveShape = (
   shape: ShapeName | ShapeComponent
 ): ShapeComponent =>
   typeof shape === "string" ? componentByName(shape) : shape;
+
+/**
+ * An array with the names of all shapes in alphabetical order
+ */
+export const shapeNames = [
+  ...Object.keys(Shapes).map((s) => s.toLowerCase()),
+].sort() as ShapeName[];

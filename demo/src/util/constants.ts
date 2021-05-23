@@ -1,6 +1,5 @@
-import * as Shapes from "patterns/shapes/shapes";
-import { ShapeName } from "patterns/shapes";
-import { LayoutName } from "patterns/patterns";
+import { layoutNames } from "patterns/patterns/grid/standardLayouts";
+import { shapeNames } from "patterns/shapes";
 
 /**
  * In order to avoid circular dependencies from links,
@@ -20,11 +19,9 @@ export const EXAMPLE_SIZE = 300;
 /**
  * An array with the names of all shapes in alphabetical order
  */
-export const SHAPE_NAMES = [
-  ...Object.keys(Shapes).map((s) => s.toLowerCase()),
-].sort() as ShapeName[];
+export const SHAPE_NAMES = shapeNames;
 
 /**
- * An array with the names of all layouts
+ * An array with the names of all layouts in alphabetical order
  */
-export const LAYOUTS: LayoutName[] = ["diagonal", "square", "triangular"];
+export const LAYOUTS = layoutNames;

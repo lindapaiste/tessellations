@@ -41,6 +41,7 @@ export interface ConcentricProps {
   count: number;
   /**
    * The thickness of each ring can be a constant, or a variable dependent on the index.
+   * Thickness describes the margin added on each side of the element.
    */
   thickness: MaybeGenerate<number, number>;
   /**
@@ -81,7 +82,7 @@ export const Concentric = ({
     // IDEA: also pass cumulative width to generator function?
     const ringThickness =
       typeof thickness === "number" ? thickness : thickness(i);
-    cumulativeWidth += ringThickness;
+    cumulativeWidth += 2 * ringThickness;
 
     const computedProps = {
       fill,

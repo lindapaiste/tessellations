@@ -20,7 +20,7 @@ export const Bullseyes = (): JSX.Element => (
         elementProps={{
           colors: randomHexes(4),
           count: 4,
-          thickness: 8,
+          thickness: 4,
         }}
       />
     </ExampleTile>
@@ -34,7 +34,7 @@ export const Bullseyes = (): JSX.Element => (
           Element: Rectangle,
           colors: randomHexes(3),
           count: 25,
-          thickness: 4,
+          thickness: 2,
         }}
       />
     </ExampleTile>
@@ -47,7 +47,7 @@ export const Bullseyes = (): JSX.Element => (
         elementProps={{
           colors: randomHexes(3),
           count: 10,
-          thickness: 8,
+          thickness: 4,
           elementProps: {
             stroke: "black",
             strokeWidth: 1,
@@ -64,7 +64,7 @@ export const Bullseyes = (): JSX.Element => (
         elementProps={{
           colors: randomHexes(3),
           count: 3,
-          thickness: 25,
+          thickness: 12.5,
           Element: "circle",
           elementProps: ({ center }: { center: Point }) => ({
             center: [

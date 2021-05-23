@@ -40,3 +40,8 @@ export const getLayoutSpacing = ({
   layout,
   spacing,
 }: StandardLayout): GridSpacing => LAYOUTS[layout](spacing);
+
+/**
+ * An array with the names of all layouts in alphabetical order
+ */
+export const layoutNames = Object.keys(LAYOUTS).sort();

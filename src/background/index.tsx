@@ -68,6 +68,10 @@ export const Background = forwardRef<SVGSVGElement, Props>(
           viewBox={`0 0 ${width} ${height}`}
           width={width}
           height={height}
+          style={{
+            overflow: "hidden",
+            ...rest.style,
+          }}
         >
           {title !== undefined && <title>{title}</title>}
           {backgroundColor !== undefined && (
