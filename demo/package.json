@@ -49,6 +49,7 @@
     "prettier": "prettier --write src/**/*",
     "lint": "eslint src/**/*",
     "build": "react-app-rewired build",
+    "vercel-build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-scripts eject"
   },
