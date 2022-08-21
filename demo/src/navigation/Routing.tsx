@@ -11,7 +11,7 @@ import { PAGES } from "./pages";
 const routes = sortBy(PAGES, (p) => p.path.length).reverse();
 
 export const Routing = (): JSX.Element => (
-  <Suspense fallback={() => <LinearProgress color="primary" />}>
+  <Suspense fallback={<LinearProgress color="primary" />}>
     <Switch>
       {routes.map((props) => (
         <Route key={props.path} {...props} />

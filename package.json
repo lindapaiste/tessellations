@@ -47,7 +47,8 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "build-demo": "cd ./demo && react-app-rewired build && cd ../",
-    "start-demo": "cd ./demo && react-app-rewired start"
+    "start-demo": "cd ./demo && react-app-rewired start",
+    "test": "ts-jest"
   },
   "main": "./src/index.js",
   "types": "./build/index.d.ts",

@@ -1,8 +1,8 @@
 import React from "react";
-import { AltPolka } from "./groups/AltPolka";
 import { Bricks } from "./groups/Bricks";
 import { Bullseyes } from "./groups/Bullseyes";
 import { Checkers } from "./groups/Checkers";
+import { Escher } from "./groups/Escher";
 import { Layered } from "./groups/Layered";
 import { Lines } from "./groups/Lines";
 import { Negative } from "./groups/Negative";
@@ -11,6 +11,7 @@ import { OverlapLines } from "./groups/OverlapLines";
 import { PolkaDotLayouts } from "./groups/PolkaDotLayouts";
 import { Radial } from "./groups/Radial";
 import { RhombusSizes } from "./groups/RhombusSizes";
+import { Scales } from "./groups/Scales";
 import { SpacingHexagons } from "./groups/SpacingHexagons";
 import { Tessellations } from "./groups/Tessellations";
 
@@ -29,12 +30,13 @@ export default function Examples(): JSX.Element {
       <Negative />
       <Tessellations />
       <Bricks />
+      <Escher />
+      <Scales />
       <Lines />
       <OverlapLines />
       <Layered />
       <Bullseyes />
       <Radial />
-      <AltPolka />
     </div>
   );
 }
