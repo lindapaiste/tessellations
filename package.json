@@ -46,7 +46,7 @@
     "prettier": "prettier --write src/**/*",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "build-demo": "cd ./demo && react-app-rewired build && cd ../",
+    "vercel-build": "cd ./demo && react-app-rewired build && cd ../",
     "start-demo": "cd ./demo && react-app-rewired start",
     "test": "ts-jest"
   },
