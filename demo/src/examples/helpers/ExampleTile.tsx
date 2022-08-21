@@ -49,6 +49,7 @@ export const ExampleTile = ({
         onClick={onClick}
         className={classes.svg}
         title={title}
+        style={{ cursor: onClick ? "pointer" : "default" }}
       >
         {children}
       </Background>

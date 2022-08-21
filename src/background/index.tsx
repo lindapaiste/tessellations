@@ -3,9 +3,10 @@ import React, {
   forwardRef,
   PropsWithChildren,
   useContext,
+  useMemo,
 } from "react";
 
-export interface BackgroundProps {
+export interface BackgroundSize {
   /**
    * Intrinsic width in pixels of the <svg> element.
    * Will also be used as the viewBox width.
@@ -16,6 +17,9 @@ export interface BackgroundProps {
    * Will also be used as the viewBox height.
    */
   height: number;
+}
+
+export interface BackgroundProps extends BackgroundSize {
   /**
    * [Optional] If provided, apply a background color to the svg element.
    */
@@ -29,10 +33,10 @@ export interface BackgroundProps {
 }
 
 /**
- * Create the BackgroundContext with an arbitrary default size to use
+ * Create the BackgroundSizeContext with an arbitrary default size to use
  * if the useBackgroundSize is called invalidly (outside of a Provider).
  */
-const BackgroundContext = createContext<BackgroundProps>({
+const BackgroundSizeContext = createContext<BackgroundSize>({
   width: 100,
   height: 100,
 });
@@ -40,8 +44,8 @@ const BackgroundContext = createContext<BackgroundProps>({
 /**
  * Hook can access the size of the current background.
  */
-export const useBackgroundSize = (): BackgroundProps =>
-  useContext(BackgroundContext);
+export const useBackgroundSize = (): BackgroundSize =>
+  useContext(BackgroundSizeContext);
 
 /**
  * Also accepts and passes through any props of the underlying <svg> element.
@@ -58,10 +62,10 @@ type Props = PropsWithChildren<BackgroundProps & JSX.IntrinsicElements["svg"]>;
  * TODO: investigate pros and cons of setting the background via style: backgroundColor vs <rect>
  */
 export const Background = forwardRef<SVGSVGElement, Props>(
-  ({ children, ...props }, ref) => {
-    const { width, height, backgroundColor, title, ...rest } = props;
+  ({ children, width, height, backgroundColor, title, ...rest }, ref) => {
+    const size = useMemo(() => ({ width, height }), [width, height]);
     return (
-      <BackgroundContext.Provider value={props}>
+      <BackgroundSizeContext.Provider value={size}>
         <svg
           {...rest}
           ref={ref}
@@ -79,7 +83,7 @@ export const Background = forwardRef<SVGSVGElement, Props>(
           )}
           {children}
         </svg>
-      </BackgroundContext.Provider>
+      </BackgroundSizeContext.Provider>
     );
   }
 );
